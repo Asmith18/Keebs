@@ -29,6 +29,7 @@ struct PostData: Hashable, Codable {
 
 class ViewModel: ObservableObject {
     @Published var post: [PostData] = []
+    @Published var loadedImageURLs = Set<String>()
     
     func fetch() {
         guard let url = URL(string: "https://www.reddit.com/r/mechmarket/new.json") else {

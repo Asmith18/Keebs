@@ -8,25 +8,28 @@
 import SwiftUI
 import URLImage
 
-func extractImageURLs(from text: String) -> [String]? {
+func extractImageURLs(from text: String) -> Set<String> {
     let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
     let matches = detector.matches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count))
-    return matches.compactMap { match in
-        guard let range = Range(match.range, in: text) else { return nil }
-        let urlString = text[range]
-        let url = URL(string: String(urlString))
-        if let host = url?.host, host.contains("imgur.com") {
-            return url?.absoluteString
-        } else {
-            return nil
+    var urls = Set<String>()
+    for match in matches {
+        guard let range = Range(match.range, in: text),
+              let url = URL(string: String(text[range])),
+              url.host?.contains("imgur.com") == true else {
+            continue
+        }
+        let urlString = url.absoluteString
+        if !urls.contains(urlString) {
+            urls.insert(urlString)
         }
     }
+    return urls
 }
 
-
+//: MARK - Original
 struct NewPostView: View {
     @StateObject var viewModel = ViewModel()
-    
+
     var body: some View {
         NavigationView {
             List(viewModel.post, id: \.self) { post in
@@ -34,22 +37,25 @@ struct NewPostView: View {
                     VStack {
                         Text(post.title)
                             .font(.headline)
-                        if let imageURLs = extractImageURLs(from: post.selftext) {
+                        if let imageURLs = extractImageURLs(from: post.selftext), !imageURLs.isEmpty {
                             ScrollView(.horizontal) {
                                 HStack {
-                                    ForEach(imageURLs, id: \.self) { url in
-                                        let _ = print(imageURLs)
+                                    let uniqueImageURLs = Set(imageURLs).filter { !viewModel.loadedImageURLs.contains($0)}
+                                    ForEach(Array(uniqueImageURLs), id: \.self) { url in
+                                        let _ = print("Loading image from URL: \(url)")
                                         AsyncImage(url: URL(string: url)) { image in
                                             image
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
+                                                .onAppear() {
+                                                    viewModel.loadedImageURLs.insert(url)
+                                                }
                                         } placeholder: {
                                             ProgressView()
                                         }
-                                        .frame(height: 200)
-                                        
+                                        .frame(height: 100)
+                                        .id(url)
                                     }
-                                    
                                 }
                             }
                         }
@@ -66,16 +72,23 @@ struct NewPostView: View {
 
 struct PostDetailView: View {
     let post: PostData
+    let imageURLs: Set<String>
+    
+    init(post: PostData) {
+        self.post = post
+        self.imageURLs = extractImageURLs(from: post.selftext)
+    }
     
     var body: some View {
         ScrollView(.vertical) {
             VStack {
                 Text(post.title)
                     .font(.headline)
-                if let imageURLs = extractImageURLs(from: post.selftext) {
+                if !imageURLs.isEmpty {
                     ScrollView(.horizontal) {
                         HStack(spacing: 10) {
-                            ForEach(imageURLs, id: \.self) { url in
+                            ForEach(Array(imageURLs), id: \.self) { url in
+                                let _ = print(imageURLs)
                                 AsyncImage(url: URL(string: url)) { image in
                                     image
                                         .resizable()
