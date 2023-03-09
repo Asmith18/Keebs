@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C284081D29B7DBA3008A94DA /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C284081C29B7DBA3008A94DA /* ViewModel.swift */; };
+		C284082029B7E8CB008A94DA /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = C284081F29B7E8CB008A94DA /* URLImage */; };
 		C2EBD22229B656B60037D0A3 /* AdamsKeebsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EBD22129B656B60037D0A3 /* AdamsKeebsApp.swift */; };
 		C2EBD22429B656B60037D0A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EBD22329B656B60037D0A3 /* ContentView.swift */; };
 		C2EBD22629B656B90037D0A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2EBD22529B656B90037D0A3 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C284081C29B7DBA3008A94DA /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		C2C8516C29BA568400574988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C2EBD21E29B656B60037D0A3 /* AdamsKeebs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdamsKeebs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EBD22129B656B60037D0A3 /* AdamsKeebsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdamsKeebsApp.swift; sourceTree = "<group>"; };
 		C2EBD22329B656B60037D0A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C284082029B7E8CB008A94DA /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +56,10 @@
 		C2EBD22029B656B60037D0A3 /* AdamsKeebs */ = {
 			isa = PBXGroup;
 			children = (
+				C2C8516C29BA568400574988 /* Info.plist */,
 				C2EBD22129B656B60037D0A3 /* AdamsKeebsApp.swift */,
 				C2EBD22329B656B60037D0A3 /* ContentView.swift */,
+				C284081C29B7DBA3008A94DA /* ViewModel.swift */,
 				C2EBD22529B656B90037D0A3 /* Assets.xcassets */,
 				C2EBD22729B656B90037D0A3 /* Preview Content */,
 			);
@@ -83,6 +90,9 @@
 			dependencies = (
 			);
 			name = AdamsKeebs;
+			packageProductDependencies = (
+				C284081F29B7E8CB008A94DA /* URLImage */,
+			);
 			productName = AdamsKeebs;
 			productReference = C2EBD21E29B656B60037D0A3 /* AdamsKeebs.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +121,9 @@
 				Base,
 			);
 			mainGroup = C2EBD21529B656B60037D0A3;
+			packageReferences = (
+				C284081E29B7E8CB008A94DA /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = C2EBD21F29B656B60037D0A3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2EBD22429B656B60037D0A3 /* ContentView.swift in Sources */,
+				C284081D29B7DBA3008A94DA /* ViewModel.swift in Sources */,
 				C2EBD22229B656B60037D0A3 /* AdamsKeebsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,7 +284,7 @@
 				DEVELOPMENT_TEAM = 9DXP3CGV77;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = AdamsKeebs/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -299,7 +313,7 @@
 				DEVELOPMENT_TEAM = 9DXP3CGV77;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = AdamsKeebs/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -339,6 +353,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C284081E29B7E8CB008A94DA /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C284081F29B7E8CB008A94DA /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C284081E29B7E8CB008A94DA /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C2EBD21629B656B60037D0A3 /* Project object */;
 }
